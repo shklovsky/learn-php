@@ -1,13 +1,21 @@
-<?php session_start();  ?>
+<?php session_start(); ?>
 <?php
 if (isset($_COOKIE)) {
-    foreach ($_COOKIE as $name => $value) {
-        //$name = htmlspecialchars($name);
-        //$value = htmlspecialchars($value);
-        echo "$name : $value <br />\n";
-    }
+    /* foreach ($_COOKIE as $name => $value) {
+      //$name = htmlspecialchars($name);
+      //$value = htmlspecialchars($value);
+      echo "$name : $value <br />\n";
+      } */
+}
+
+if (isset($_GET['logout'])) {
+    setcookie('loggedIn', false, time() + 3600, "/lessons/lesson1/");
+    //setcookie('PHPSESSID', session_id());
+    setcookie('login', false, time() + 3600, "/lessons/lesson1/");
+    header('Location: /lessons/lesson1/');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,8 +30,7 @@ if (isset($_COOKIE)) {
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (isset($_COOKIE['loggedIn']) && $_COOKIE['loggedIn']) { ?>
-                        <li><?= $_COOKIE['login']; ?></li>
-                        <li><a href="">Выйти</a></li>
+                        <li><a class="logout-btt" href="index.php?logout">Выйти</a></li>
                     <?php } ?>
                 </ul>
             </div>

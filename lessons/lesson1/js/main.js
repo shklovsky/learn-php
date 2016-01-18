@@ -17,9 +17,18 @@ $(document).ready(function () {
             },
             success: function (data) {
                 alert("PHP ответило нам: " + data);
+                location.reload();
             }
-            
+
         });
 
     });
+
+
+    $('.logout-btt').click(function () {
+        //window.location.reload = "";
+        //console.log('button click');
+    });
+    
+
 });

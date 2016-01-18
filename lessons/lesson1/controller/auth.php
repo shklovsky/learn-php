@@ -13,9 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if ($customer_login == "shklovsky" && $customer_email = "shklovsky@mail.ru" && $customer_password == "shklovsky") {
     //echo $customer_login . " " . $customer_password . " " . $customer_email;
 
-    setcookie('loggedIn', true);
+    setcookie('loggedIn', true, time() + 3600 , "/lessons/lesson1/");
     setcookie('PHPSESSID', session_id());
-    setcookie('login', $customer_login);
+    setcookie('login', $customer_login, time() + 3600, "/lessons/lesson1/");
     session_start();
     //header('Location: ' . $_SERVER['PHP_SELF']);
 
