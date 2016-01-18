@@ -1,3 +1,13 @@
+<?php session_start();  ?>
+<?php
+if (isset($_COOKIE)) {
+    foreach ($_COOKIE as $name => $value) {
+        //$name = htmlspecialchars($name);
+        //$value = htmlspecialchars($value);
+        echo "$name : $value <br />\n";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +21,10 @@
         <div class="container">
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="">Выйти</a></li>
+                    <?php if (isset($_COOKIE['loggedIn']) && $_COOKIE['loggedIn']) { ?>
+                        <li><?= $_COOKIE['login']; ?></li>
+                        <li><a href="">Выйти</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
