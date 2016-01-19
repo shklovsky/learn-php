@@ -9,8 +9,6 @@ if (isset($_GET['action'])) {
 } else {
     $action = "";
 }
-
-$articles = articles_all($link);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,11 +23,18 @@ $articles = articles_all($link);
         <?php include 'widgets/nav.php'; ?>
         <div class="articles container">
             <h1 class="articles-head">Контент админки</h1>
-            <?php if ($action == "add") { ?>
-                <?php include '../views/article_admin.php'; ?>
-            <?php } else { ?>
-                <?php include '../views/articles_admin.php'; ?>
-            <?php } ?>
+            <?php
+            if ($action == "add") {
+                if (!empty($_POST)) {
+                    articles_new($link, $_POST['title'], $_POST['date'], $_POST['content']);
+                    header("Location: /index.php");
+                }
+                include '../views/article_admin.php';
+            } else {
+                $articles = articles_all($link);
+                include '../views/articles_admin.php';
+            }
+            ?>
         </div>
         <footer>
             <div class="footer-inner">
@@ -38,5 +43,7 @@ $articles = articles_all($link);
                 </p>
             </div>
         </footer>
+        
+        <script src="/admin/assets/js/admin.js"  type="text/javascript"></script>
     </body>
 </html>
